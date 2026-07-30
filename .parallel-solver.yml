@@ -1,0 +1,16 @@
+# .parallel-solver.yml
+forge: github
+sandbox: docker
+concurrency: 3
+
+git:
+  identity:
+    name: Blackjack Solver Bot
+    email: blackjack-solver@users.noreply.github.com
+
+baseBranch: master
+
+dependencies:
+  enabled: true
+
+labelFilter: ready-for-agent
