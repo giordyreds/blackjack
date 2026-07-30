@@ -20,6 +20,16 @@ _PAYOUT_MULTIPLIERS = {
 }
 
 
+def payout_amount(amount: int, outcome: Outcome) -> int:
+    """The amount credited back for a given staked amount and outcome.
+
+    Used directly for stakes that fall outside a Bet's $10-$500 range, such
+    as a doubled-down or split hand's stake.
+    """
+    numerator, denominator = _PAYOUT_MULTIPLIERS[outcome]
+    return amount * numerator // denominator
+
+
 class Bet:
     """The amount staked by the player on a round."""
 
@@ -35,5 +45,4 @@ class Bet:
         self.amount = amount
 
     def payout(self, outcome: Outcome) -> int:
-        numerator, denominator = _PAYOUT_MULTIPLIERS[outcome]
-        return self.amount * numerator // denominator
+        return payout_amount(self.amount, outcome)
