@@ -8,6 +8,9 @@ class Hand:
 
     def __init__(self, cards: Iterable[Card] | None = None) -> None:
         self.cards = list(cards) if cards is not None else []
+        self.is_split_aces = False
+        self.is_doubled = False
+        self.from_split = False
 
     def add_card(self, card: Card) -> None:
         self.cards.append(card)
@@ -28,4 +31,10 @@ class Hand:
 
     @property
     def is_natural(self) -> bool:
+        if self.is_split_aces:
+            return False
         return len(self.cards) == 2 and self.value() == 21
+
+    @property
+    def is_pair(self) -> bool:
+        return len(self.cards) == 2 and self.cards[0].rank is self.cards[1].rank
