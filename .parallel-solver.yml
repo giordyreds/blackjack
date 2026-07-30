@@ -5,6 +5,8 @@ concurrency: 3
 
 docker:
   dockerfile: ./sandbox.Dockerfile
+  claudePlugins:
+    - mattpocock-skills@mattpocock
 
 git:
   identity:
