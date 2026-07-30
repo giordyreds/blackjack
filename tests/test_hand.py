@@ -76,3 +76,31 @@ def test_21_reached_via_hit_is_not_natural():
 def test_non_21_two_card_hand_is_not_natural():
     hand = Hand([Card(Rank.TEN, Suit.SPADES), Card(Rank.SEVEN, Suit.HEARTS)])
     assert hand.is_natural is False
+
+
+def test_split_aces_hand_is_never_a_natural_even_at_21():
+    hand = Hand([Card(Rank.ACE, Suit.SPADES), Card(Rank.KING, Suit.HEARTS)])
+    hand.is_split_aces = True
+    assert hand.value() == 21
+    assert hand.is_natural is False
+
+
+def test_two_cards_of_the_same_rank_is_a_pair():
+    hand = Hand([Card(Rank.EIGHT, Suit.SPADES), Card(Rank.EIGHT, Suit.HEARTS)])
+    assert hand.is_pair is True
+
+
+def test_two_cards_of_different_rank_is_not_a_pair():
+    hand = Hand([Card(Rank.EIGHT, Suit.SPADES), Card(Rank.NINE, Suit.HEARTS)])
+    assert hand.is_pair is False
+
+
+def test_more_than_two_cards_is_not_a_pair():
+    hand = Hand(
+        [
+            Card(Rank.EIGHT, Suit.SPADES),
+            Card(Rank.EIGHT, Suit.HEARTS),
+            Card(Rank.TWO, Suit.CLUBS),
+        ]
+    )
+    assert hand.is_pair is False
