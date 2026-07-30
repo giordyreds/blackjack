@@ -3,6 +3,9 @@ forge: github
 sandbox: docker
 concurrency: 3
 
+docker:
+  dockerfile: ./sandbox.Dockerfile
+
 git:
   identity:
     name: Blackjack Solver Bot
